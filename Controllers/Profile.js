@@ -18,7 +18,7 @@ exports.getProfile = async (req, res) => {
 };
 
 exports.createProfile = async (req, res) => {
-    const { firstName, lastName, age, bio } = req.body;
+    const { firstName, lastName, DateOfBirth, bio } = req.body;
     try {
         console.log(req.user);
         if (req.user.Profile) {
@@ -29,7 +29,7 @@ exports.createProfile = async (req, res) => {
             const profile = await req.user.createProfile({
                 firstName,
                 lastName,
-                age,
+                DateOfBirth,
                 bio,
             });
             res.json(profile);
@@ -43,7 +43,7 @@ exports.createProfile = async (req, res) => {
 };
 
 exports.updateProfile = async (req, res) => {
-    const { firstName, lastName, age, bio } = req.body;
+    const { firstName, lastName, DateOfBirth, bio } = req.body;
     try {
         const profile = await req.user.getProfile();
         if (!profile) {
@@ -54,7 +54,7 @@ exports.updateProfile = async (req, res) => {
 
         if (firstName) profile.firstName = firstName;
         if (lastName) profile.lastName = lastName;
-        if (age) profile.age = age;
+        if (DateOfBirth) profile.DateOfBirth = age;
         if (bio) profile.bio = bio;
 
         await profile.save();

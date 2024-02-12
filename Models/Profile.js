@@ -17,8 +17,8 @@ const Profile = sequelize.define("Profile", {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    age: {
-        type: DataTypes.INTEGER,
+    DateOfBirth: {
+        type: DataTypes.STRING,
         allowNull: false,
     },
     bio: {
