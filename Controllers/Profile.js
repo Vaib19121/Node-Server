@@ -17,8 +17,26 @@ exports.getProfile = async (req, res) => {
     }
 };
 
+function calculateAge(dateString) {
+    const birthDate = new Date(dateString);
+    const currentDate = new Date();
+
+    let age = currentDate.getFullYear() - birthDate.getFullYear();
+
+    // Check if the birthday has occurred this year
+    if (
+        currentDate.getMonth() < birthDate.getMonth() ||
+        (currentDate.getMonth() === birthDate.getMonth() &&
+            currentDate.getDate() < birthDate.getDate())
+    ) {
+        age--;
+    }
+
+    return age;
+}
+
 exports.createProfile = async (req, res) => {
-    const { firstName, lastName, age, bio } = req.body;
+    const { firstName, lastName, bio, DateOfBirth } = req.body;
     try {
         console.log(req.user);
         if (req.user.Profile) {
@@ -26,6 +44,9 @@ exports.createProfile = async (req, res) => {
                 error: "Profile already exists",
             });
         } else {
+            
+            const age = calculateAge(DateOfBirth);
+            
             const profile = await req.user.createProfile({
                 firstName,
                 lastName,

@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const cors = require("cors");
+app.use(cors());
 app.use(bodyParser.json());
 const sequelize = require("./Utils/database");
 const routes = require("./Routes/index");
@@ -11,14 +13,35 @@ const Score = require("./Models/Score");
 const Profile = require("./Models/Profile");
 const Answer = require("./Models/Answer");
 require("dotenv").config();
+// cors
 
 app.get("/", (req, res) => {
     res.send("Hello, Vaibhav!");
 });
 
+app.post("/webhook", (req, res) => {
+    console.log("/webhook: ",req.body);
+    res.send("Hello, Vaibhav! This is a webhook!");
+} );
+
+app.use((req, res, next) => {
+    console.log(req.url);
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    );
+    if (req.method === "OPTIONS") {
+        res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH");
+        return res.status(200).json({});
+    }
+    next();
+}
+);
+
 app.use(routes);
 
-const PORT = 3000;
+const PORT = 6000;
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);

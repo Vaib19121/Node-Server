@@ -43,6 +43,7 @@ exports.login = async (req, res) => {
 
 exports.register = async (req, res) => {
     try {
+        console.log(req.body);
         if (
             !req.body.email ||
             !req.body.password ||
