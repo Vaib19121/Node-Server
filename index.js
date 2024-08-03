@@ -20,7 +20,6 @@ app.get("/", (req, res) => {
     res.send("Hello, Vaibhav!");
 });
 
-<<<<<<< HEAD
 app.post("/webhook", (req, res) => {
     console.log("/webhook: ",req.body);
     res.send("Hello, Vaibhav! This is a webhook!");
@@ -40,13 +39,6 @@ app.use((req, res, next) => {
     next();
 }
 );
-=======
-// print every request url and method to console
-app.use((req, res, next) => {
-    console.log("[", req.method, "]:", req.url);
-    next();
-});
->>>>>>> 3150fcebb8334b721cc887c15149604e277a12b9
 
 app.use(routes);
 

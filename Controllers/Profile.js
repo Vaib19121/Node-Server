@@ -36,11 +36,7 @@ function calculateAge(dateString) {
 }
 
 exports.createProfile = async (req, res) => {
-<<<<<<< HEAD
     const { firstName, lastName, bio, DateOfBirth } = req.body;
-=======
-    const { firstName, lastName, DateOfBirth, bio } = req.body;
->>>>>>> 3150fcebb8334b721cc887c15149604e277a12b9
     try {
         console.log(req.user);
         if (req.user.Profile) {
