@@ -4,6 +4,7 @@ const nodemailer = require('nodemailer');
 const bodyParser = require("body-parser");
 const cors = require("cors");
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 const sequelize = require("./Utils/database");
 const routes = require("./Routes/index");
@@ -25,7 +26,10 @@ app.get("/", (req, res) => {
 // send email 
 app.post("/send-email",(req,res)=>{
     const {username,time_slot,phone,email} = req.body
-    console.log("/send-email",req.body)
+    console.log("/send-email",req)
+    if (!username || !time_slot || !phone || !email) {
+        return res.status(400).json({ error: "All fields are required" });
+    }
     sendMail(process.env.EMAILTO,`Appointment for ${username}`,null, `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd;">
             <h2 style="color: #4CAF50;">New Appointment Scheduled</h2>
