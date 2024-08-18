@@ -26,7 +26,6 @@ app.get("/", (req, res) => {
 // send email 
 app.post("/send-email",(req,res)=>{
     const {username,time_slot,phone,email} = req.body
-    console.log("/send-email",req)
     if (!username || !time_slot || !phone || !email) {
         return res.status(400).json({ error: "All fields are required" });
     }
