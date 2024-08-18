@@ -49,7 +49,7 @@ app.post("/send-email",(req,res)=>{
                 </tr>
             </table>
             <p style="margin-top: 20px;">Please contact the client for any further details or changes to the appointment.</p>
-            <p style="margin-top: 20px;">Best regards,<br>Your Appointment System</p>
+            <p style="margin-top: 20px;">Best regards,<br>Sparkle & Shine Autocare</p>
         </div>
         `)
         return  res.status(200).json({
